@@ -1,7 +1,7 @@
-require("dotenv").config();
 const { Sequelize, DataTypes } = require("sequelize");
 const fs = require("fs");
 const path = require("path");
+require("dotenv").config({ path: path.resolve(__dirname, "../.env") });
 
 // Initialisation Sequelize avec PostgreSQL
 const sequelize = new Sequelize(
@@ -17,7 +17,7 @@ const sequelize = new Sequelize(
 );
 
 // 📌 Liste des fichiers dans le dossier models
-const modelsPath = path.join(__dirname, "../models");
+const modelsPath = path.join(__dirname, "../src/models");
 const models = {}; // Objet pour stocker les modèles
 
 fs.readdirSync(modelsPath)

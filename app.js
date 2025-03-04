@@ -4,6 +4,11 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 
+require("dotenv").config(); // Charger les variables d'environnement
+const express = require("express");
+const cors = require("cors");
+const helmet = require("helmet");
+
 var indexRouter = require('./src/routes/index');
 var usersRouter = require('./src/routes/users');
 
