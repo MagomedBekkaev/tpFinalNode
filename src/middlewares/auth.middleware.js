@@ -12,7 +12,7 @@ const auth = (req, res, next) => {
             throw new Error("Token missing");
         }
 
-        const decodedToken = jwt.verify(token, 'secret');
+        const decodedToken = jwt.verify(token, process.env.SECRET_KEY);
         req.auth = { email: decodedToken.sub, userId: decodedToken.userId };
 
         next();

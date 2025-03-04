@@ -11,7 +11,25 @@ async function getMovieById(id) {
     return movie;
 }
 
+async function createMovie(movieData) {
+    return await Movie.create(movieData);
+}
+
+async function updateMovie(id, movieData) {
+    const movie = await Movie.findByPk(id);
+    await movie.update(movieData);
+    return movie;
+}
+
+async function deleteMovie(id) {
+    const movie = await Movie.findByPk(id);
+    await movie.destroy();
+}
+
 module.exports = {
     listAllMovies,
-    getMovieById
+    getMovieById,
+    createMovie,
+    updateMovie,
+    deleteMovie
 }
