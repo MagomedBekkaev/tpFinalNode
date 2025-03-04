@@ -6,11 +6,21 @@ async function listAllUsers() {
     return users;
 }
 
+async function getUserByEmail(email) {
+    return await User.findOne({ where: { email } });
+}
+
 async function createUser(userData) {
     return await User.create(userData);
+}
+
+async function signIn(email) {
+    return await User.findOne({ where: { email } });
 }
 
 module.exports = {
     listAllUsers,
     createUser,
+    getUserByEmail,
+    signIn
 };

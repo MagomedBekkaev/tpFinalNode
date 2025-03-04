@@ -50,7 +50,7 @@ sequelize
 
 // ✅ Synchronisation des modèles avec la DB
 sequelize
-  .sync({ force: true, alter: true }) // ⚠️ Mettre `alter: true` en prod pour éviter la perte de données
+  .sync({ force: false, alter: true }) // ⚠️ Mettre `alter: true` en prod pour éviter la perte de données
   .then(() => {
     console.log("✅ Les modèles sont synchronisés avec la base de données.");
   })

@@ -38,15 +38,24 @@ const signIn = async (req, res) => {
             throw new Error('Invalid password');
         }
         
-        const token = jwt.sign({ id: user.id }, process.env.SECRET_KEY, { expiresIn: '1h' });
+        const token = jwt.sign({ sub: user.email, id: user.id }, process.env.SECRET_KEY, { expiresIn: '1h' });
         
         res.status(200).json({ user, token });
     } catch (error) {
-        res.status(400).json({error: error.message});
+        res.status(401).json({ message: error.message || "Authentification échouée" });
     }
 }
+
+const getProfile = async (req, res) => {
+    const email = req.auth.email;
+    
+    const user = await userService.findUerByEmail(email);
+    res.status(200).json(user)
+    };
 
 module.exports = {
     listAllUsers,
     signUp,
+    signIn,
+    getProfile
 };
