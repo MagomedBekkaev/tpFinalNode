@@ -2,12 +2,12 @@ const userService = require('../services/user.service');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 
-async function listAllUsers(req, res, next) {
+async function listAllUsers(req, res) {
     try {
         const users = await userService.listAllUsers();
         res.status(200).json(users);
     } catch (error) {
-        next(error);
+        res.status(401).json(users);
     }
 }
 
@@ -48,7 +48,7 @@ const signIn = async (req, res) => {
 
 const getProfile = async (req, res) => {
     const email = req.auth.email;
-    
+
     const user = await userService.findUerByEmail(email);
     res.status(200).json(user)
     };
