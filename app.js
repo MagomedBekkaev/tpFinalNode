@@ -5,17 +5,23 @@ var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 
 require("dotenv").config(); // Charger les variables d'environnement
-const express = require("express");
-const cors = require("cors");
-const helmet = require("helmet");
 
-var indexRouter = require('./src/routes/index');
-var usersRouter = require('./src/routes/users');
+const bcrypt = require("bcrypt");
+// const cors = require("cors");
+// const helmet = require("helmet");
 
 var app = express();
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
+app.set('view engine', 'jade');
+
+var indexRouter = require('./src/routes/index');
+var usersRouter = require('./src/routes/users');
+
+
+
+// view engine setup
 app.set('view engine', 'jade');
 
 app.use(logger('dev'));
@@ -28,8 +34,13 @@ app.use('/', indexRouter);
 app.use('/users', usersRouter);
 
 // catch 404 and forward to error handler
-app.use(function(req, res, next) {
-  next(createError(404));
+// app.use(function(req, res, next) {
+//   next(createError(404));
+// });
+
+const port = process.env.PORT || 5000;
+app.listen(port, () => {
+  console.log(`Server is running on port ${port}`);
 });
 
 // error handler
